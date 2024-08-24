@@ -17,7 +17,7 @@ const Students = () => {
     }, []);
 
     const getStudents = () => {
-        axios.get('http://localhost:3001/api/students')
+        axios.get(process.env.REACT_ENDPOINT + '/api/students')
             .then(response => {
                 setStudents(response.data?.response || []);
             })
@@ -35,7 +35,7 @@ const Students = () => {
             grade: data.grade,
         };
 
-        axios.post('http://localhost:3001/api/createstudent', payload)
+        axios.post(process.env.REACT_ENDPOINT + '/api/createstudent', payload)
             .then(() => {
                 getStudents();
                 setSubmitted(false);
@@ -55,7 +55,7 @@ const Students = () => {
             grade: data.grade,
         };
 
-        axios.put('http://localhost:3001/api/updatestudent', payload)
+        axios.put(process.env.REACT_ENDPOINT + '/api/updatestudent', payload)
             .then(() => {
                 getStudents();
                 setSubmitted(false);
@@ -67,7 +67,7 @@ const Students = () => {
     };
 
     const deleteStudent = (data) => {
-        axios.delete('http://localhost:3001/api/deletestudent', { data: { id: data.id }})
+        axios.delete(process.env.REACT_ENDPOINT + '/api/deletestudent', { data: { id: data.id }})
             .then(() => {
                 getStudents();
             })
